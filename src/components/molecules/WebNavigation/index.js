@@ -1,0 +1,191 @@
+// src/components/WebNavigation.js
+import React, { useState, useEffect } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Link,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  Button,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+
+const WebNavigation = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const menuItems = [
+    { key: "Home", to: "/" },
+    { key: "Cards", to: "/cards/search" },
+    { key: "Certificates", to: "/certificate/search" },
+    { key: "Services", to: "/services" },
+    { key: "About", to: "/about-us" },
+    { key: "Contact", to: "/contact-us" },
+  ];
+
+  // Detect scroll for transparent → solid navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      <AppBar
+        position="fixed"
+        elevation={scrolled ? 6 : 0}
+        sx={{
+          transition: "all 0.3s ease",
+          backgroundColor: {
+            xs: "white",
+            md: scrolled ? "white" : "transparent",
+          },
+          color: {
+            xs: "#1867bf",
+            md: scrolled ? "#1867bf" : "white",
+          },
+          boxShadow: {
+            xs: "0px 2px 10px rgba(0,0,0,0.08)",
+            md: scrolled ? "0px 4px 12px rgba(0,0,0,0.1)" : "none",
+          },
+        }}
+      >
+        <Container>
+          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+            {/* Logo */}
+            <Box
+              component="img"
+              src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
+              alt="Company Logo"
+              sx={{ height: "140px", width: "240px", cursor: "pointer" }}
+            />
+
+            {/* Desktop Menu */}
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                gap: 4,
+                alignItems: "center",
+              }}
+            >
+              {menuItems.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.to}
+                  underline="none"
+                  sx={{
+                    color: "#1867bf",
+                    fontWeight: "700",
+                    fontSize: "1.25rem",
+                    position: "relative",
+                    "&:hover": { color: "#ffcc00" },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -4,
+                      left: 0,
+                      width: "0%",
+                      height: "2px",
+                      bgcolor: "#ffcc00",
+                      transition: "width 0.3s ease",
+                    },
+                    "&:hover::after": { width: "100%" },
+                  }}
+                >
+                  {item.key}
+                </Link>
+              ))}
+              {/* Login Button */}
+              <Button
+                href="/login"
+                variant="contained"
+                sx={{
+                  ml: 2,
+                  backgroundColor: "#1867bf",
+                  color: "#fff",
+                  fontWeight: "700",
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#e6b800",
+                  },
+                }}
+              >
+                Login
+              </Button>
+            </Box>
+
+            {/* Mobile Menu Button */}
+            <IconButton
+              edge="end"
+              onClick={handleDrawerToggle}
+              sx={{ display: { xs: "flex", md: "none" }, color: "#1867bf" }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{ display: { xs: "block", md: "none" } }}
+      >
+        <Box sx={{ width: 250, p: 2 }}>
+          <List>
+            {menuItems.map((item) => (
+              <ListItem
+                button
+                key={item.key}
+                component="a"
+                href={item.to}
+                onClick={handleDrawerToggle}
+                sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}
+              >
+                <ListItemText
+                  primary={item.key}
+                  sx={{ textAlign: "center", fontWeight: "600", color: "#1867bf" }}
+                />
+              </ListItem>
+            ))}
+            {/* Mobile Login Button */}
+            <ListItem
+              button
+              component="a"
+              href="/login"
+              onClick={handleDrawerToggle}
+              sx={{
+                mt: 1,
+                textAlign: "center",
+                backgroundColor: "#1867bf",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#e6b800" },
+              }}
+            >
+              <ListItemText
+                primary="Login"
+                sx={{ fontWeight: "700" }}
+              />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+    </>
+  );
+};
+
+export default WebNavigation;
