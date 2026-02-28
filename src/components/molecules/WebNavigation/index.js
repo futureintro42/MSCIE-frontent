@@ -12,6 +12,7 @@ import {
   ListItemText,
   Box,
   Button,
+  Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -32,7 +33,6 @@ const WebNavigation = () => {
     { key: "Contact", to: "/contact-us" },
   ];
 
-  // Detect scroll for transparent → solid navbar
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -45,38 +45,44 @@ const WebNavigation = () => {
     <>
       <AppBar
         position="fixed"
-        elevation={scrolled ? 6 : 0}
+        elevation={0}
         sx={{
-          transition: "all 0.3s ease",
+          transition: "all 0.35s ease",
+          backdropFilter: scrolled ? "blur(10px)" : "blur(0px)",
           backgroundColor: {
-            xs: "white",
-            md: scrolled ? "white" : "transparent",
+            xs: "#ffffff",
+            md: scrolled
+              ? "rgba(255,255,255,0.95)"
+              : "rgba(0,0,0,0.25)",
           },
-          color: {
-            xs: "#1867bf",
-            md: scrolled ? "#1867bf" : "white",
-          },
-          boxShadow: {
-            xs: "0px 2px 10px rgba(0,0,0,0.08)",
-            md: scrolled ? "0px 4px 12px rgba(0,0,0,0.1)" : "none",
-          },
+          color: scrolled ? "#1867bf" : "#ffffff",
+          boxShadow: scrolled
+            ? "0px 4px 20px rgba(0,0,0,0.08)"
+            : "none",
+          py: scrolled ? 0.5 : 1.2,
         }}
       >
         <Container>
           <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+            
             {/* Logo */}
             <Box
               component="img"
               src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               alt="Company Logo"
-              sx={{ height: "140px", width: "240px", cursor: "pointer" }}
+              sx={{
+                height: scrolled ? "60px" : "90px",
+                width: "auto",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+              }}
             />
 
             {/* Desktop Menu */}
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
-                gap: 4,
+                gap: 5,
                 alignItems: "center",
               }}
             >
@@ -86,39 +92,53 @@ const WebNavigation = () => {
                   href={item.to}
                   underline="none"
                   sx={{
-                    color: "#1867bf",
-                    fontWeight: "700",
-                    fontSize: "1.25rem",
+                    fontWeight: 600,
+                    fontSize: "1.05rem",
+                    letterSpacing: "0.5px",
+                    color: scrolled ? "#1867bf" : "#ffffff",
                     position: "relative",
-                    "&:hover": { color: "#ffcc00" },
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      color: "#ffcc00",
+                    },
                     "&::after": {
                       content: '""',
                       position: "absolute",
-                      bottom: -4,
-                      left: 0,
+                      bottom: -6,
+                      left: "50%",
+                      transform: "translateX(-50%)",
                       width: "0%",
-                      height: "2px",
+                      height: "3px",
+                      borderRadius: "4px",
                       bgcolor: "#ffcc00",
                       transition: "width 0.3s ease",
                     },
-                    "&:hover::after": { width: "100%" },
+                    "&:hover::after": {
+                      width: "70%",
+                    },
                   }}
                 >
                   {item.key}
                 </Link>
               ))}
+
               {/* Login Button */}
               <Button
                 href="/login"
                 variant="contained"
                 sx={{
                   ml: 2,
-                  backgroundColor: "#1867bf",
-                  color: "#fff",
-                  fontWeight: "700",
+                  px: 3,
+                  py: 1,
+                  borderRadius: "30px",
+                  fontWeight: 700,
                   textTransform: "none",
+                  background: "linear-gradient(45deg, #1867bf, #004ba0)",
+                  boxShadow: "0 4px 12px rgba(24,103,191,0.3)",
                   "&:hover": {
-                    backgroundColor: "#e6b800",
+                    background:
+                      "linear-gradient(45deg, #e6b800, #ffcc00)",
+                    color: "#000",
                   },
                 }}
               >
@@ -130,7 +150,10 @@ const WebNavigation = () => {
             <IconButton
               edge="end"
               onClick={handleDrawerToggle}
-              sx={{ display: { xs: "flex", md: "none" }, color: "#1867bf" }}
+              sx={{
+                display: { xs: "flex", md: "none" },
+                color: scrolled ? "#1867bf" : "#ffffff",
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -145,7 +168,16 @@ const WebNavigation = () => {
         onClose={handleDrawerToggle}
         sx={{ display: { xs: "block", md: "none" } }}
       >
-        <Box sx={{ width: 250, p: 2 }}>
+        <Box
+          sx={{
+            width: 280,
+            p: 3,
+            height: "100%",
+            background:
+              "linear-gradient(to bottom, #1867bf, #004ba0)",
+            color: "#fff",
+          }}
+        >
           <List>
             {menuItems.map((item) => (
               <ListItem
@@ -154,32 +186,43 @@ const WebNavigation = () => {
                 component="a"
                 href={item.to}
                 onClick={handleDrawerToggle}
-                sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}
+                sx={{
+                  borderRadius: 2,
+                  mb: 1,
+                  "&:hover": {
+                    backgroundColor: "rgba(255,255,255,0.15)",
+                  },
+                }}
               >
                 <ListItemText
                   primary={item.key}
-                  sx={{ textAlign: "center", fontWeight: "600", color: "#1867bf" }}
+                  sx={{
+                    textAlign: "left",
+                    fontWeight: 600,
+                  }}
                 />
               </ListItem>
             ))}
-            {/* Mobile Login Button */}
+
+            <Divider sx={{ my: 2, bgcolor: "rgba(255,255,255,0.3)" }} />
+
             <ListItem
               button
               component="a"
               href="/login"
               onClick={handleDrawerToggle}
               sx={{
-                mt: 1,
-                textAlign: "center",
-                backgroundColor: "#1867bf",
-                color: "#fff",
-                "&:hover": { backgroundColor: "#e6b800" },
+                borderRadius: 3,
+                backgroundColor: "#ffcc00",
+                color: "#000",
+                fontWeight: 700,
+                justifyContent: "center",
+                "&:hover": {
+                  backgroundColor: "#e6b800",
+                },
               }}
             >
-              <ListItemText
-                primary="Login"
-                sx={{ fontWeight: "700" }}
-              />
+              <ListItemText primary="Login" />
             </ListItem>
           </List>
         </Box>

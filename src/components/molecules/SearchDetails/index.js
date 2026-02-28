@@ -10,9 +10,15 @@ import {
   Grid,
   Alert,
   CardContent,
+  Box,
+  InputAdornment
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
-import { FIND_CARD_BY_SEARCH, FIND_INVOICE_BY_SEARCH } from "../../../constants/Query";
+import {
+  FIND_CARD_BY_SEARCH,
+  FIND_INVOICE_BY_SEARCH,
+} from "../../../constants/Query";
 
 const SEARCH_FIELDS = {
   cards: [
@@ -33,70 +39,114 @@ const SearchDetails = ({ pageType }) => {
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
 
-  // Queries
-  const [findCardBySearch, { loading: cardLoading, data: cardData, error: cardError }] =
-    useLazyQuery(FIND_CARD_BY_SEARCH);
-  const [findInvoiceBySearch, { loading: certLoading, data: certData, error: certError }] =
-    useLazyQuery(FIND_INVOICE_BY_SEARCH);
+  const [
+    findCardBySearch,
+    { loading: cardLoading, data: cardData, error: cardError },
+  ] = useLazyQuery(FIND_CARD_BY_SEARCH);
 
-  // Handle search
+  const [
+    findInvoiceBySearch,
+    { loading: certLoading, data: certData, error: certError },
+  ] = useLazyQuery(FIND_INVOICE_BY_SEARCH);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchField || !searchTerm.trim()) return;
 
-    const variables = { input: { attribute: searchField, value: searchTerm } };
+    const variables = {
+      input: { attribute: searchField, value: searchTerm },
+    };
+
     if (pageType === "cards") findCardBySearch({ variables });
     if (pageType === "certificate") findInvoiceBySearch({ variables });
   };
 
-  // Handle response for both queries
   useEffect(() => {
     const handleResponse = (data, error) => {
       if (!data || error) return;
-      const response = pageType === "cards" ? data.findCardBySearch : data.findInvoiceBySearch;
+
+      const response =
+        pageType === "cards"
+          ? data.findCardBySearch
+          : data.findInvoiceBySearch;
+
       setSeverity(response.severity);
       setMessage(response.message);
+
       if (response.severity?.includes("success")) {
         navigate(`/${pageType}/details/${response?.response?._id}`);
       }
     };
 
-    if (pageType === "cards" && !cardLoading) handleResponse(cardData, cardError);
-    if (pageType === "certificate" && !certLoading) handleResponse(certData, certError);
-  }, [cardLoading, certLoading, cardData, certData, cardError, certError, pageType, navigate]);
+    if (pageType === "cards" && !cardLoading)
+      handleResponse(cardData, cardError);
+
+    if (pageType === "certificate" && !certLoading)
+      handleResponse(certData, certError);
+  }, [
+    cardLoading,
+    certLoading,
+    cardData,
+    certData,
+    cardError,
+    certError,
+    pageType,
+    navigate,
+  ]);
 
   const searchOptions = SEARCH_FIELDS[pageType] || [];
-  // const isSearchDisabled = !searchField || !searchTerm.trim();
-  // const handleDashboard = () => {
-  //   if(pageType){
-  //   navigate(`/${pageType.toLowerCase()}`);
-  //   }
-  // }
 
   return (
     <Container maxWidth={false} disableGutters>
-      <Card sx={{ border: 1, borderColor: "#fff", boxShadow: "5px 5px 5px 5px #00000024" }}>
-        <CardContent>
-          <Grid container spacing={2}>
-          <Grid item xs={12}>
-          <Typography variant="h1" gutterBottom sx={{ display: "flex", justifyContent: "center", marginTop: "20px", color: '#1867bf' }}>
-            {`Search ${pageType === "cards" ? "Cards" : "Certificate"}`}
-          </Typography>
-          </Grid>
+      <Card
+        sx={{
+          border: 1,
+          borderColor: "#fff",
+          boxShadow: "5px 5px 20px rgba(0,0,0,0.08)",
+          borderRadius: 3,
+        }}
+      >
+        <CardContent sx={{ px: 4, py: 5 }}>
+          <Grid container spacing={3}>
+            
+            {/* Title */}
             <Grid item xs={12}>
-              {severity && message && (
-                <Grid item xs={12}>
-                  <Alert variant="standard" severity={severity} sx={{ width: "100%", mt: 1 }}>
-                    {message}
-                  </Alert>
-                </Grid>
-              )}
+              <Box textAlign="center">
+                <Typography
+                  variant="h4"
+                  fontWeight={700}
+                  sx={{
+                    color: "#1867bf",
+                    letterSpacing: 1,
+                  }}
+                >
+                  {`Search ${
+                    pageType === "cards" ? "Cards" : "Certificate"
+                  }`}
+                </Typography>
+              </Box>
             </Grid>
-          <Grid item xs={12}>
+
+            {/* Alert */}
+            {severity && message && (
+              <Grid item xs={12}>
+                <Alert
+                  variant="filled"
+                  severity={severity}
+                  sx={{ borderRadius: 2 }}
+                >
+                  {message}
+                </Alert>
+              </Grid>
+            )}
+
+            {/* Form */}
+            <Grid item xs={12}>
               <form onSubmit={handleSearch}>
-                <Grid container spacing={2}>
-                  {/* Dropdown */}
-                  <Grid item xs={12} sm={5} sx={{display: 'none'}}>
+                <Grid container spacing={2} alignItems="center">
+
+                  {/* Hidden Dropdown */}
+                  <Grid item xs={12} sm={5} sx={{ display: "none" }}>
                     <TextField
                       select
                       label="Search By"
@@ -120,28 +170,50 @@ const SearchDetails = ({ pageType }) => {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       fullWidth
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 3,
+                          backgroundColor: "#fafafa",
+                        },
+                      }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon sx={{ color: "#1867bf" }} />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
 
                   {/* Search Button */}
-                  <Grid item xs={12} sm={4} display="flex" alignItems="center">
+                  <Grid item xs={12} sm={4}>
                     <Button
                       type="submit"
                       variant="contained"
-                      size="large"
-                      color="primary"
-                      sx={{height: '52px', backgroundColor: '#1867bf'}}
                       fullWidth
-                      // disabled={isSearchDisabled}
+                      sx={{
+                        height: "56px",
+                        borderRadius: 3,
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        backgroundColor: "#1867bf",
+                        boxShadow: "0 5px 15px rgba(24,103,191,0.3)",
+                        "&:hover": {
+                          backgroundColor: "#0f4c8d",
+                        },
+                      }}
                     >
                       Search
                     </Button>
                   </Grid>
+
                 </Grid>
               </form>
+            </Grid>
+
           </Grid>
-          </Grid>
-          </CardContent>
+        </CardContent>
       </Card>
     </Container>
   );

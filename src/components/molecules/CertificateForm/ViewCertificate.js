@@ -7,34 +7,40 @@ import {
   Card,
   CardContent,
   Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
   Button,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import QRCode from "react-qr-code";
 import ReactToPrint from "react-to-print";
 import { formatDate } from "../../../utils/utils";
 
-const StripedTableCell = styled(TableCell)(() => ({
-  "&.MuiTableCell-root": {
-    border: "1px solid black",
-    width: "25%",
-    padding: "3px 8px",
-    fontWeight: "600",
-  },
+const Label = styled("span")(() => ({
+  fontWeight: 600,
+  fontSize: "11px",
+  textTransform: "uppercase",
+  marginRight: "6px",
 }));
-const StripedCertificateTableCell = styled(TableCell)(() => ({
-  "&.MuiTableCell-root": {
-    border: "1px solid black",
-    width: "15%",
-    padding: "3px 8px",
-    fontWeight: "600",
-  },
+
+const Value = styled("span")(() => ({
+  fontSize: "11px",
 }));
+
+const Section = ({ title, children }) => (
+  <Box sx={{ mb: 1 }}>
+    {title && (
+      <Typography
+        variant="subtitle2"
+        align="center"
+        sx={{ fontWeight: 700, textTransform: "uppercase", mb: 0.5 }}
+      >
+        {title}
+      </Typography>
+    )}
+    {children}
+    <Divider sx={{ my: 0.5 }} />
+  </Box>
+);
 
 const ViewCertificate = ({ title, dataRow }) => {
   const ref = useRef();
@@ -60,368 +66,119 @@ const ViewCertificate = ({ title, dataRow }) => {
     year_of_manufacturing,
     id,
   } = dataRow || {};
-  const descriptionRows = [
-    {
-      col: "EQUIPMENT TYIP",
-      colValue: equipment_type,
-      col1: "DESCRIPTION & IDENTIFICATION OF THE EQUIPMENT",
-      col1Value: equipment_description,
-    },
-    {
-      col: "MANUFACTURER",
-      colValue: make,
-      col1: "SERIAL NUMBER",
-      col1Value: serial_number,
-    },
-    {
-      col: "DATE OF MANUFACTURE EQUIPMENT",
-      colValue: year_of_manufacturing,
-      col1: "REGISTRATION PLAT NUMBER",
-      col1Value: plant_number,
-    },
-    {
-      col: "LOCATION OF THE EQUIPMENT",
-      colValue: location_of_equipment,
-      col1: "",
-      col1Value: "",
-    },
-    {
-      col: "OWNER’S BUSINESS NAME",
-      colValue: owner_business_name,
-      col1: "OWNER’S BUSINESS ADDRESS",
-      col1Value: owner_business_address,
-    },
-    {
-      col: "DETAILS OF ANY DEFECTS OR COMMENTS",
-      colValue: details,
-      col1: "WAS IT INSTALLED CORRECTLY LOAD CHART IN CAB",
-      col1Value: standard_specification,
-    },
-  ];
+
   return (
-    <Container
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        padding: { xs: 0 },
-      }}
-    >
-      <Card sx={{ mb: 4, width: "100%" }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <RouterLink to="/certificate/search" style={{ textDecoration: "none", color: "#3366FF", alignContent: "center", paddingLeft: "20px" }}>Search certificate</RouterLink>
-          <ReactToPrint
-            bodyClass="print-agreement"
-            content={() => ref.current}
-            trigger={() => <Button type="primary">Print</Button>}
-          />
+    <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", padding: 0 }}>
+      {/* Header */}
+
+      <Card sx={{ mb: 4, width: "100%", boxShadow: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
+          <RouterLink
+            to="/certificate/search"
+            style={{
+              textDecoration: "none",
+              color: "#1976d2",
+              fontWeight: 600,
+            }}
+          >
+            ← Search certificate
+          </RouterLink>
+
+          <ReactToPrint content={() => ref.current} trigger={() => <Button size="small" variant="contained">Print</Button>} />
         </Box>
       </Card>
-      <Card sx={{ width: "100%" }} ref={ref}>
-        <CardContent sx={{ mt: 12 }}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography
-                variant="h5"
-                component="h5"
-                sx={{ textAlign: "center", textTransform: "uppercase" }}
-              >
-                Certificate of testing and comprehensive inspection of the
-                equipment
-              </Typography>
-              <TableContainer>
-                <Table aria-label="certificate">
-                  <TableBody>
-                    <TableRow>
-                      <StripedCertificateTableCell
-                        padding="normal"
-                        size="small"
-                      >
-                        CERTIFICATE NUMBER
-                      </StripedCertificateTableCell>
-                      <StripedCertificateTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ color: "red" }}
-                      >
-                        {id}
-                      </StripedCertificateTableCell>
-                      <StripedCertificateTableCell
-                        padding="normal"
-                        size="small"
-                      >
-                        STICKER NUMBER
-                      </StripedCertificateTableCell>
-                      <StripedCertificateTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ color: "red" }}
-                      >
-                        {sticker_number}
-                      </StripedCertificateTableCell>
-                      <StripedCertificateTableCell
-                        padding="normal"
-                        size="small"
-                      >
-                        REFERENCE NUMBER
-                      </StripedCertificateTableCell>
-                      <StripedCertificateTableCell
-                        sx={{ width: "15%", color: "red" }}
-                        padding="normal"
-                        size="small"
-                      >
-                        {reference_number}
-                      </StripedCertificateTableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+
+      {/* Certificate Body */}
+      <Card sx={{ width: "100%", p: 2 }} ref={ref}>
+        <CardContent sx={{ p: 1 }}>
+          <Typography variant="h6" align="center" sx={{ textTransform: "uppercase", mb: 1 }}>
+            Certificate of Testing and Comprehensive Inspection of Equipment
+          </Typography>
+
+          {/* Certificate Numbers */}
+          <Section>
+            <Grid container spacing={1}>
+              <Grid item xs={4}><Label>Certificate No:</Label><Value>{id}</Value></Grid>
+              <Grid item xs={4}><Label>Sticker No:</Label><Value>{sticker_number}</Value></Grid>
+              <Grid item xs={4}><Label>Reference No:</Label><Value>{reference_number}</Value></Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography
-                variant="h5"
-                component="h5"
-                sx={{ textAlign: "center" }}
-              >
-                DESCRIPTION OF THE EQUIPMENT
-              </Typography>
-              <TableContainer>
-                <Table aria-label="equipment-description">
-                  <TableBody>
-                    {descriptionRows.map((row) => (
-                      <TableRow key={`${row.col}_${row.colValue}`}>
-                        <StripedTableCell
-                          padding="normal"
-                          size="small"
-                          sx={{ width: "25%" }}
-                        >
-                          {row.col}
-                        </StripedTableCell>
-                        <StripedTableCell
-                          sx={{ width: "25%" }}
-                          padding="normal"
-                          size="small"
-                        >
-                          {row.colValue}
-                        </StripedTableCell>
-                        <StripedTableCell
-                          padding="normal"
-                          size="small"
-                          sx={{ width: "25%" }}
-                        >
-                          {row.col1}
-                        </StripedTableCell>
-                        <StripedTableCell
-                          sx={{ width: "25%" }}
-                          padding="normal"
-                          size="small"
-                        >
-                          {row.col1Value}
-                        </StripedTableCell>
-                      </TableRow>
-                    ))}
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        colSpan={4}
-                      >
-                        <Typography
-                          variant="h5"
-                          component="h5"
-                          sx={{ textAlign: "center" }}
-                        >
-                          VISUAL INSPECTION AND FUNCTIONAL TESTS WERE
-                          SATISFACTORY FINAL RESULT -{" "}
-                          {resultStatus?.toUpperCase()}
-                        </Typography>
-                      </StripedTableCell>
-                    </TableRow>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "30%" }}
-                      >
-                        BUSINESS NAME
-                      </StripedTableCell>
-                      <StripedTableCell
-                        sx={{ width: "30%" }}
-                        padding="normal"
-                        size="small"
-                      >
-                        {business_name}
-                      </StripedTableCell>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "30%" }}
-                      >
-                        BUSINESS ADDRESS
-                      </StripedTableCell>
-                      <StripedTableCell
-                        sx={{ width: "30%" }}
-                        padding="normal"
-                        size="small"
-                      >
-                        {business_address}
-                      </StripedTableCell>
-                    </TableRow>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "30%" }}
-                      >
-                        DATE OF INSPECTION
-                      </StripedTableCell>
-                      <StripedTableCell
-                        sx={{ width: "30%" }}
-                        padding="normal"
-                        size="small"
-                      >
-                        {formatDate(inspection_date)}
-                      </StripedTableCell>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "30%" }}
-                      >
-                        DATE OF NEXT INSPECTION
-                      </StripedTableCell>
-                      <StripedTableCell
-                        sx={{ width: "30%" }}
-                        padding="normal"
-                        size="small"
-                      >
-                        {formatDate(inspection_next_date)}
-                      </StripedTableCell>
-                    </TableRow>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        colSpan={4}
-                      >
-                        <Typography variant="h5" component="h5">
-                          DECLARATTION:
-                        </Typography>
-                        <Typography
-                          sx={{
-                            textTransform: "uppercase",
-                            fontSize: "12px",
-                            fontWeight: "600",
-                          }}
-                        >
-                          I HEREBY DECLARE THAT THE ABOVE INFORMATION IS CORRECT
-                          AND THAT THE EQUIPMENT HAS BEEN TESTED AND THOROUGHLY
-                          EXAMINED IN ACCORDANCE WITH THE APPROPRIATE
-                          PROVISIONS/STANDARDS AT THE TIME OF INSPECTION AND
-                          FOUND TO BE FREE FROM ANY DEFECT SAFETY OTHER THAN
-                          THESE DETAILED ABOVE
-                        </Typography>
-                      </StripedTableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+          </Section>
+
+          {/* Equipment Description */}
+          <Section title="Description of Equipment">
+            <Grid container spacing={1}>
+              <Grid item xs={6}><Label>Type:</Label><Value>{equipment_type}</Value></Grid>
+              <Grid item xs={6}><Label>Description:</Label><Value>{equipment_description}</Value></Grid>
+              <Grid item xs={6}><Label>Manufacturer:</Label><Value>{make}</Value></Grid>
+              <Grid item xs={6}><Label>Serial No:</Label><Value>{serial_number}</Value></Grid>
+              <Grid item xs={6}><Label>Year:</Label><Value>{year_of_manufacturing}</Value></Grid>
+              <Grid item xs={6}><Label>Plant No:</Label><Value>{plant_number}</Value></Grid>
+              <Grid item xs={12}><Label>Location:</Label><Value>{location_of_equipment}</Value></Grid>
+              <Grid item xs={6}><Label>Owner Name:</Label><Value>{owner_business_name}</Value></Grid>
+              <Grid item xs={6}><Label>Owner Address:</Label><Value>{owner_business_address}</Value></Grid>
+              <Grid item xs={6}><Label>Defects:</Label><Value>{details}</Value></Grid>
+              <Grid item xs={6}><Label>Specification:</Label><Value>{standard_specification}</Value></Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TableContainer>
-                <Table aria-label="certificate">
-                  <TableBody>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        colSpan={2}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "baseline",
-                          }}
-                        >
-                          <Typography
-                            variant="h5"
-                            component="h5"
-                            sx={{ textDecoration: "underline" }}
-                          >
-                            Disclaimer
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: "12px",
-                              ml: 1,
-                              fontWeight: "600",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            : THIS CERTIFICATE IS ISSUED SUBJECT TO THE
-                            OBSERVATION MADE AT THE TIME OF OUR INSPECTION. THE
-                            INSPECTION COMPANY WILL NOT BE HELD LIABLE FOR ANY
-                            DAMAGES OR LOSSES OCCASIONED TO THE EQUIPMENT
-                            SUBSEQUENT TO THE INSPECTION.
-                          </Typography>
-                        </Box>
-                      </StripedTableCell>
-                    </TableRow>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        sx={{ width: "30%" }}
-                      >
-                        INSPECTOR’S NAME
-                      </StripedTableCell>
-                      <StripedTableCell padding="normal" size="small">
-                        {inspector_name}
-                      </StripedTableCell>
-                    </TableRow>
-                    <TableRow>
-                      <StripedTableCell
-                        padding="normal"
-                        size="small"
-                        colSpan={2}
-                      >
-                        <Grid container spacing={0.1}>
-                          <Grid item xs={6} sx={{ mt: 0.2 }}>
-                            <QRCode
-                              size={280}
-                              style={{ height: "60px", width: "100px" }}
-                              value={`${window.location.origin}/certificate/search`}
-                              viewBox={`0 0 280 280`}
-                            />
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            sx={{
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              mt: 0.2,
-                            }}
-                          >
-                            <Typography sx={{ fontWeight: "600" }}>
-                              Technical Director
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography>
-                              To verify the authenticity of the certificate
-                              data, please scan the QR code
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </StripedTableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+            <Typography align="center" sx={{ fontSize: "11px", fontWeight: 600, mt: 0.5 }}>
+              VISUAL INSPECTION AND FUNCTIONAL TESTS WERE
+              SATISFACTORY FINAL RESULT -{" "}
+              {resultStatus?.toUpperCase()}
+            </Typography>
+          </Section>
+
+          {/* Business Info */}
+          <Section>
+            <Grid container spacing={1}>
+              <Grid item xs={6}><Label>Business Name:</Label><Value>{business_name}</Value></Grid>
+              <Grid item xs={6}><Label>Business Address:</Label><Value>{business_address}</Value></Grid>
+              <Grid item xs={6}><Label>Inspection Date:</Label><Value>{formatDate(inspection_date)}</Value></Grid>
+              <Grid item xs={6}><Label>Next Inspection:</Label><Value>{formatDate(inspection_next_date)}</Value></Grid>
             </Grid>
-          </Grid>
+          </Section>
+
+          {/* Declaration with signature */}
+          <Section title="Declaration">
+            <Typography sx={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", mb: 1 }}>
+              I hereby declare that the above information is correct and that the equipment has been tested and thoroughly examined in accordance with the appropriate provisions/standards at the time of inspection and found to be free from any defect safety other than these detailed above.
+            </Typography>
+
+            <Grid container spacing={2} sx={{ mt: 1 }}>
+              {/* Signature on left */}
+              <Grid item xs={6}>
+                <Box sx={{ borderTop: "1px solid #000", width: "80%", mt: 4 }}>
+                  <Typography sx={{ fontSize: "11px", fontWeight: 600 }}>Signature</Typography>
+                </Box>
+              </Grid>
+
+              {/* Date on right */}
+              <Grid item xs={6} sx={{ textAlign: "right" }}>
+                <Box sx={{ borderTop: "1px solid #000", width: "80%", mt: 4, ml: "auto" }}>
+                  <Typography sx={{ fontSize: "11px", fontWeight: 600 }}>Date</Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </Section>
+
+          {/* Disclaimer & Inspector */}
+          <Section title="Disclaimer">
+            <Typography sx={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", mb: 1 }}>
+              This certificate is issued subject to the observation made at the time of our inspection. The inspection company will not be held liable for any damages or losses occasioned to the equipment subsequent to the inspection.
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item xs={6}><Label>Inspector:</Label><Value>{inspector_name}</Value></Grid>
+              <Grid item xs={6} sx={{ textAlign: "right" }}>
+                <Typography sx={{ fontWeight: 600, fontSize: "11px" }}>Technical Director</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <QRCode size={80} value={`${window.location.origin}/certificate/search`} />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography sx={{ fontSize: "10px" }}>
+                  To verify the authenticity of the certificate data, please scan the QR code
+                </Typography>
+              </Grid>
+            </Grid>
+          </Section>
         </CardContent>
       </Card>
     </Container>

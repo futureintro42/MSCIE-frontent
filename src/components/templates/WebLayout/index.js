@@ -38,7 +38,7 @@ const WebLayout = ({ pageTitle, isHome = false, children }) => {
         {children}
         <ImageSlider />
       </Box>
-
+        
       {/* Footer */}
       <WebFooter />
     </Box>

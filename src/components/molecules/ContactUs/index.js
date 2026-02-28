@@ -8,6 +8,7 @@ import {
   Stack,
   Paper,
   Alert,
+  Container
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { CONTACT_US } from "../../../constants/Mutation";
@@ -62,189 +63,194 @@ const ContactUs = () => {
   }, [loading, error, data]);
 
   return (
-    <Box sx={{ bgcolor: "#f9f9f9" }}>
-      {/* Section Heading */}
-      <Box textAlign="center" mb={3}>
-        <Typography variant="h3" fontWeight="bold" color="#1867bf" gutterBottom>
-          Connect with Us
-        </Typography>
-        <Box
+    <Box sx={{ py: 10, bgcolor: "background.default" }}>
+      <Container maxWidth="lg">
+        <Paper
+          elevation={0}
           sx={{
-            width: "80px",
-            height: "4px",
-            bgcolor: "#1867bf",
-            mx: "auto",
-            borderRadius: "2px",
+            borderRadius: 4,
+            overflow: "hidden",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
           }}
-        />
-        <Typography variant="body1" color="text.secondary" mt={2}>
-          Have questions or need assistance? Fill out the form or reach us
-          through the details below.
-        </Typography>
-      </Box>
+        >
+          <Grid container>
 
-      <Grid container spacing={6}>
-        {/* Form */}
-        <Grid item xs={12} md={7}>
-          <Paper
-            elevation={3}
-            sx={{ p: { xs: 3, md: 5 }, borderRadius: 3, bgcolor: "white" }}
-          >
-            {severity && message && (
-              <Alert
-                variant="standard"
-                severity={severity}
-                sx={{ width: "100%", mt: 1 }}
-              >
-                {message}
-              </Alert>
-            )}
-            <Box component="form" onSubmit={handleSubmit}>
+            {/* LEFT PANEL */}
+            <Grid
+              item
+              xs={12}
+              md={5}
+              sx={{
+                background:
+                  "linear-gradient(135deg, #0D47A1 0%, #1976D2 100%)",
+                color: "#fff",
+                p: { xs: 5, md: 6 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="h4" fontWeight={700} gutterBottom>
+                Let's Talk
+              </Typography>
+
+              <Typography sx={{ opacity: 0.85, mb: 4 }}>
+                We would love to hear from you.
+              </Typography>
+
               <Stack spacing={3}>
-                <TextField
-                  label="Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  error={!!errors.name}
-                  helperText={errors.name}
-                  fullWidth
-                />
-                <TextField
-                  label="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  error={!!errors.email}
-                  helperText={errors.email}
-                  fullWidth
-                />
-                <TextField
-                  label="Mobile Number"
-                  name="mobile"
-                  value={formData.mobile}
-                  onChange={(e) =>
-                    setFormData({ ...formData, mobile: e.target.value })
-                  }
-                  error={!!errors.mobile}
-                  helperText={errors.mobile}
-                  fullWidth
-                />
-                <TextField
-                  label="Subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={(e) =>
-                    setFormData({ ...formData, subject: e.target.value })
-                  }
-                  error={!!errors.subject}
-                  helperText={errors.subject}
-                  fullWidth
-                />
-                <TextField
-                  label="Message"
-                  name="message"
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  error={!!errors.message}
-                  helperText={errors.message}
-                  fullWidth
-                  multiline
-                  rows={4}
-                />
-                <Box textAlign="center" mt={2}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      borderRadius: "25px",
-                      px: 5,
-                      py: 1.5,
-                      textTransform: "none",
-                      background: "#1867bf",
-                      "&:hover": {
-                        background: "#16325c",
-                        boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
-                      },
-                    }}
-                  >
-                    Send Message
-                  </Button>
-                </Box>
+                <Stack direction="row" spacing={2}>
+                  <LocationOn />
+                  <Typography>
+                    جدة - حي السنابل - السعودية
+                  </Typography>
+                </Stack>
+
+                <Stack direction="row" spacing={2}>
+                  <Phone />
+                  <Typography>0538507454</Typography>
+                </Stack>
+
+                <Stack direction="row" spacing={2}>
+                  <Email />
+                  <Typography>info@aliiec.com</Typography>
+                </Stack>
               </Stack>
-            </Box>
-          </Paper>
-        </Grid>
+            </Grid>
 
-        {/* Contact Details */}
-        <Grid item xs={12} md={5}>
-          <Stack spacing={3}>
-            <Paper
-              elevation={2}
-              sx={{ p: 3, display: "flex", gap: 2, alignItems: "flex-start" }}
+            {/* RIGHT PANEL */}
+            <Grid
+              item
+              xs={12}
+              md={7}
+              sx={{
+                p: { xs: 4, md: 6 },
+                bgcolor: "background.paper",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <LocationOn sx={{ color: "#1867bf", fontSize: 30 }} />
-              <Typography variant="body1">
-                2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
-              </Typography>
-            </Paper>
+              <Box sx={{ width: "100%" }}>
+                <Typography
+                  variant="h5"
+                  fontWeight={700}
+                  mb={3}
+                >
+                  Send Us a Message
+                </Typography>
 
-            <Paper
-              elevation={2}
-              sx={{ p: 3, display: "flex", gap: 2, alignItems: "center" }}
-            >
-              <Phone sx={{ color: "#1867bf", fontSize: 28 }} />
-              <Typography variant="body1">
-                0538507454
-              </Typography>
-            </Paper>
+                {severity && message && (
+                  <Alert severity={severity} sx={{ mb: 3 }}>
+                    {message}
+                  </Alert>
+                )}
 
-            <Paper
-              elevation={2}
-              sx={{ p: 3, display: "flex", gap: 2, alignItems: "center" }}
-            >
-              <Email sx={{ color: "#1867bf", fontSize: 28 }} />
-              <Typography variant="body1">info@aliiec.com</Typography>
-            </Paper>
+                <Box component="form" onSubmit={handleSubmit}>
+                  <Stack spacing={3}>
+                    <TextField
+                      label="Full Name"
+                      fullWidth
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      error={!!errors.name}
+                      helperText={errors.name}
+                    />
 
-            <Paper elevation={2} sx={{ p: 3 }}>
-              <Typography
-                variant="h6"
-                fontWeight="bold"
-                mb={1}
-                sx={{ color: "#1867bf" }}
-              >
-                Working Hours
-              </Typography>
-              <Typography variant="body2">
-                Sat – Thu: 9:00 AM – 6:00 PM
-              </Typography>
-              <Typography variant="body2">
-                Friday & public holidays: Closed
-              </Typography>
-            </Paper>
-          </Stack>
-        </Grid>
-      </Grid>
-      {/* Embedded Google Map */}
-      <Box mt={6}>
-        <Box
-          component="iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7429.5860279590315!2d39.26782784555164!3d21.39805321068467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cb0018379f91%3A0x8986ad96f81a031!2z2K3ZiiDYp9mE2LPZhtin2KjZhA!5e0!3m2!1sen!2sin!4v1771823230381!5m2!1sen!2sin"
-          width="100%"
-          height={{ xs: "300px", md: "450px" }}
-          sx={{ border: 0, borderRadius: 2 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </Box>
+                    <TextField
+                      label="Email"
+                      fullWidth
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          email: e.target.value,
+                        })
+                      }
+                      error={!!errors.email}
+                      helperText={errors.email}
+                    />
+
+                    <TextField
+                      label="Mobile"
+                      fullWidth
+                      value={formData.mobile}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          mobile: e.target.value,
+                        })
+                      }
+                      error={!!errors.mobile}
+                      helperText={errors.mobile}
+                    />
+
+                    <TextField
+                      label="Subject"
+                      fullWidth
+                      value={formData.subject}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          subject: e.target.value,
+                        })
+                      }
+                      error={!!errors.subject}
+                      helperText={errors.subject}
+                    />
+
+                    <TextField
+                      label="Message"
+                      multiline
+                      rows={4}
+                      fullWidth
+                      value={formData.message}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          message: e.target.value,
+                        })
+                      }
+                      error={!!errors.message}
+                      helperText={errors.message}
+                    />
+
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      size="large"
+                      sx={{
+                        mt: 2,
+                        borderRadius: "30px",
+                        py: 1.5,
+                        fontWeight: 600,
+                        textTransform: "none",
+                      }}
+                    >
+                      Send Message
+                    </Button>
+                  </Stack>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Paper>
+
+        {/* MAP */}
+        <Box mt={8}>
+          <Box
+            component="iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7429.5860279590315!2d39.26782784555164!3d21.39805321068467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cb0018379f91%3A0x8986ad96f81a031!2z2K3ZiiDYp9mE2LPZhtin2KjZhA!5e0!3m2!1sen!2sin!4v1771823230381!5m2!1sen!2sin"
+            width="100%"
+            height={{ xs: "300px", md: "450px" }}
+            sx={{ border: 0, borderRadius: 2 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </Box>
+      </Container>
     </Box>
   );
 };

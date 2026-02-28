@@ -6,8 +6,42 @@ import {
   CardContent,
   Container,
   CardMedia,
-  Divider
+  Box,
+  Divider,
 } from "@mui/material";
+
+const InfoRow = ({ label, value }) => (
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      py: 1.5,
+      px: 2,
+      borderRadius: 2,
+      backgroundColor: "#f5f9ff",
+    }}
+  >
+    <Typography
+      sx={{
+        fontWeight: 600,
+        color: "#0f4c8d",
+      }}
+    >
+      {label}
+    </Typography>
+
+    <Typography
+      sx={{
+        fontWeight: 500,
+        color: "#333",
+        textAlign: "right",
+      }}
+    >
+      {value || "-"}
+    </Typography>
+  </Box>
+);
 
 const CertificateDetails = ({ dataRow }) => {
   const {
@@ -29,166 +63,129 @@ const CertificateDetails = ({ dataRow }) => {
     <Container
       sx={{
         display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        mt: { sm: 5, xs: 0 },
-        padding: { xs: 0 }
+        justifyContent: "center",
+        mt: { sm: 6, xs: 2 },
+        px: { xs: 1 },
+        mb:2
       }}
     >
-      <Card sx={{ width: { xs: "100%", sm: "60%" } }}>
-        <CardContent>
-          <Grid container spacing={1}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CardMedia
-                component="img"
-                alt="logo"
-                image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
-                sx={{
-                  objectFit: "fill",
-                  width: "220px",
-                  height: "120px",
-                  alignItems: "center",
-                }}
-              />
-              <Typography
-                variant="h2"
-                component="h2"
-                sx={{ textAlign: "center", color: "#0f4c8d" }}
-              >
-                Modern Security Co. for Inspection & Examination
-              </Typography>
-              <Divider
-                sx={{
-                  mb: 0.5,
-                  mt: 0.5,
-                  borderWidth: 2,
-                  borderColor: "#22568a",
-                  width: "100%",
-                }}
-              />
-            </Grid>
+      <Card
+        sx={{
+          width: { xs: "100%", sm: "80%", md: "65%" },
+          borderRadius: 4,
+          boxShadow: "0 15px 40px rgba(0,0,0,0.15)",
+          overflow: "hidden",
+        }}
+      >
+        {/* ================= HEADER ================= */}
+        <Box
+          sx={{
+            background: "linear-gradient(135deg, #0f4c8d, #1867bf)",
+            color: "white",
+            textAlign: "center",
+            py: 4,
+            px: 2,
+          }}
+        >
+          <CardMedia
+            component="img"
+            alt="logo"
+            image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
+            sx={{
+              width: 180,
+              height: 90,
+              objectFit: "contain",
+              mx: "auto",
+              mb: 2,
+            }}
+          />
+
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{ letterSpacing: 0.5 }}
+          >
+            Modern Security Co. for Inspection & Examination
+          </Typography>
+        </Box>
+
+        {/* ================= TITLE ================= */}
+        <Box sx={{ textAlign: "center", py: 3 }}>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            sx={{ color: "#0f4c8d" }}
+          >
+            SAFETY Certificate Information
+          </Typography>
+
+          <Divider
+            sx={{
+              width: 80,
+              height: 3,
+              backgroundColor: "#1867bf",
+              mx: "auto",
+              mt: 1,
+              borderRadius: 2,
+            }}
+          />
+        </Box>
+
+        {/* ================= INFORMATION ================= */}
+        <CardContent sx={{ px: { xs: 2, md: 4 }, pb: 4 }}>
+          <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography
-                variant="h3"
-                component="h3"
-                sx={{ textAlign: "center", color: "#0f4c8d" }}
-              >
-                SAFETY Certificate information
-              </Typography>
-              <Divider
-                sx={{
-                  mb: 0.5,
-                  mt: 0.5,
-                  borderWidth: 2,
-                  borderColor: "#22568a",
-                  width: "100%",
-                }}
+              <InfoRow label="Certificate No." value={id} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InfoRow label="Sticker No." value={sticker_number} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InfoRow label="Reference No." value={reference_number} />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <InfoRow label="Date of Inspection" value={inspection_date} />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <InfoRow
+                label="Next Inspection Date"
+                value={inspection_next_date}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Certificate No.
-              </Typography>
+
+            <Grid item xs={12}>
+              <InfoRow label="Equipment Type" value={equipment_type} />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{id}</Typography>
+
+            <Grid item xs={12}>
+              <InfoRow
+                label="Equipment Description"
+                value={equipment_description}
+              />
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Sticker No.
-              </Typography>
+              <InfoRow label="Make" value={make} />
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Typography>{sticker_number}</Typography>
+              <InfoRow label="Serial No." value={serial_number} />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Reference No.
-              </Typography>
+
+            <Grid item xs={12}>
+              <InfoRow label="Business Name" value={business_name} />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{reference_number}</Typography>
+
+            <Grid item xs={12}>
+              <InfoRow label="Business Address" value={business_address} />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Date of inspection
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{inspection_date}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Date of next inspection
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{inspection_next_date}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Equipment tyip
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{equipment_type}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Equipment description
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{equipment_description}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Make
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{make}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Serial No.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{serial_number}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Business name
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{business_name}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Business address
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{business_address}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="h4" component="h4">
-                Inspector's name
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{inspector_name}</Typography>
+
+            <Grid item xs={12}>
+              <InfoRow label="Inspector's Name" value={inspector_name} />
             </Grid>
           </Grid>
         </CardContent>

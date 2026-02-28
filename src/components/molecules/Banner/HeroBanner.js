@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Container, Button, Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // 👈 add this
+import { useNavigate } from "react-router-dom";
 
 const images = [
   `${process.env.PUBLIC_URL}/assets/images/banner1.jpeg`,
@@ -8,7 +8,7 @@ const images = [
   `${process.env.PUBLIC_URL}/assets/images/banner3.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner4.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner5.jpeg`,
-  `${process.env.PUBLIC_URL}/assets/images/banner6.jpg`,
+  `${process.env.PUBLIC_URL}/assets/images/banner6.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner7.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner8.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner9.jpeg`,
@@ -19,9 +19,8 @@ const images = [
 
 const HeroBanner = () => {
   const [current, setCurrent] = useState(0);
-  const navigate = useNavigate(); // 👈 init
+  const navigate = useNavigate();
 
-  // Auto-slide background images
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -57,7 +56,7 @@ const HeroBanner = () => {
         />
       ))}
 
-      {/* Overlay */}
+      {/* Gradient Overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -65,7 +64,8 @@ const HeroBanner = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          bgcolor: "rgba(0,0,0,0.5)",
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.2) 100%)",
           zIndex: 1,
         }}
       />
@@ -76,81 +76,100 @@ const HeroBanner = () => {
         sx={{
           position: "relative",
           zIndex: 2,
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
           height: "100%",
-          textAlign: "center",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        <Typography
-          variant="h2"
-          fontWeight="bold"
+        <Box
           sx={{
-            fontSize: { xs: "2rem", md: "3.5rem" },
-            textShadow: "2px 2px 8px rgba(0,0,0,0.6)",
-            mb: 2,
-            animation: "fadeInUp 1.5s ease",
+            maxWidth: "650px",
+            color: "white",
+            p: { xs: 3, md: 5 },
+            backdropFilter: "blur(12px)",
+            background: "rgba(255,255,255,0.05)",
+            borderRadius: "20px",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
           }}
         >
-          Welcome to Modern Security Co. for Inspection & Examination
-        </Typography>
-
-        <Typography
-          variant="h6"
-          sx={{
-            fontSize: { xs: "1rem", md: "1.25rem" },
-            maxWidth: "800px",
-            mx: "auto",
-            mb: 4,
-            opacity: 0.9,
-            animation: "fadeInUp 2s ease",
-          }}
-        >
-          Trusted partner in inspection, testing, safety, and professional training.
-        </Typography>
-
-        <Stack direction="row" spacing={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/about-us")} // 👈 redirect
+          {/* Accent Line */}
+          <Box
             sx={{
-              borderRadius: "30px",
-              px: 4,
-              py: 1,
-              fontWeight: "bold",
-              fontSize: "1rem",
-              textTransform: "none",
+              width: "60px",
+              height: "5px",
               backgroundColor: "#1867bf",
+              mb: 3,
+              borderRadius: "4px",
             }}
-          >
-            Learn More
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            onClick={() => navigate("/contact-us")} // 👈 redirect
+          />
+
+          <Typography
+            variant="h2"
+            fontWeight="bold"
             sx={{
-              borderRadius: "30px",
-              px: 4,
-              py: 1,
-              fontWeight: "bold",
-              fontSize: "1rem",
-              textTransform: "none",
-              borderColor: "white",
-              color: "white",
-              "&:hover": {
-                bgcolor: "rgba(255,255,255,0.1)",
-                borderColor: "white",
-              },
+              fontSize: { xs: "2rem", md: "3.2rem" },
+              lineHeight: 1.2,
+              mb: 3,
             }}
           >
-            Contact Us
-          </Button>
-        </Stack>
+            Welcome to Modern Security Co. for Inspection & Examination
+          </Typography>
+
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: { xs: "1rem", md: "1.2rem" },
+              opacity: 0.9,
+              mb: 4,
+            }}
+          >
+            Trusted partner in inspection, testing, safety, and professional training.
+          </Typography>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+          >
+            <Button
+              variant="contained"
+              onClick={() => navigate("/about-us")}
+              sx={{
+                borderRadius: "50px",
+                px: 5,
+                py: 1.3,
+                fontWeight: "bold",
+                fontSize: "1rem",
+                textTransform: "none",
+                backgroundColor: "#1867bf",
+                boxShadow: "0 6px 20px rgba(24,103,191,0.4)",
+              }}
+            >
+              Learn More
+            </Button>
+
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/contact-us")}
+              sx={{
+                borderRadius: "50px",
+                px: 5,
+                py: 1.3,
+                fontWeight: "bold",
+                fontSize: "1rem",
+                textTransform: "none",
+                borderColor: "white",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderColor: "white",
+                },
+              }}
+            >
+              Contact Us
+            </Button>
+          </Stack>
+        </Box>
       </Container>
     </Box>
   );
