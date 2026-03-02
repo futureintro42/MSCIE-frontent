@@ -68,143 +68,206 @@ const LoginForms = () => {
   }, [loading, error, data, setError, navigate, setSubmitted]);
 
   return (
-    <Container maxWidth={false} sx={{ maxWidth: "600px" }}>
-      <Card sx={{ mt: 10, border: 1, borderColor: "primary.dark" }}>
-        <CardContent>
-          <Box
+  <Container maxWidth={false} sx={{ maxWidth: "600px" }}>
+    <Card
+      sx={{
+        mt: 5,
+        mb: 15,
+        borderRadius: 4,
+        boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+        borderLeft: "6px solid #1976d2",
+        backdropFilter: "blur(6px)",
+        backgroundColor: "rgba(255,255,255,0.95)",
+      }}
+    >
+      <CardContent sx={{ px: 5, py: 5 }}>
+        {/* Header */}
+        <Box sx={{ textAlign: "left", mb: 4 }}>
+          <Avatar
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              bgcolor: "#1976d2",
+              width: 48,
+              height: 48,
+              mb: 2,
             }}
           >
-            <Avatar sx={{ bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h2">
-              Login
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit(onSubmitHandler)}
-              noValidate
-              sx={{ mt: 1 }}
-              autoComplete="off"
-            >
-              {severity && message && (
+            <LockOutlinedIcon />
+          </Avatar>
+
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{ fontWeight: 700 }}
+          >
+            Login
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{ color: "text.secondary", mt: 0.5 }}
+          >
+          </Typography>
+        </Box>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmitHandler)}
+          noValidate
+          autoComplete="off"
+        >
+          <Grid container spacing={3}>
+            {severity && message && (
+              <Grid item xs={12}>
                 <Alert
-                  variant="standard"
                   severity={severity}
-                  sx={{ width: "100%", mt: 1 }}
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 2,
+                    backgroundColor: "#f5f7fb",
+                  }}
                 >
                   {message}
                 </Alert>
-              )}
-              <FormControl
-                variant="outlined"
-                autoComplete="off"
-                margin="normal"
-                sx={{ width: "100%" }}
-              >
-                <InputLabel htmlFor="email" aria-label="Email" required>
+              </Grid>
+            )}
+
+            {/* Email */}
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="email" required>
                   Email
                 </InputLabel>
                 <OutlinedInput
                   id="email"
-                  name="email"
                   type="email"
-                  autoComplete="off"
-                  label="Username"
-                  aria-label="email"
-                  sx={{ width: "100%" }}
-                  aria-describedby="email-error"
+                  label="Email"
                   error={!!errors?.email?.message}
+                  sx={{
+                    borderRadius: 2,
+                    backgroundColor: "#f9fafc",
+                  }}
                   {...register("email")}
                 />
                 {errors?.email && (
-                  <FormHelperText error id="email-error">
+                  <FormHelperText error>
                     {errors?.email?.message}
                   </FormHelperText>
                 )}
               </FormControl>
+            </Grid>
 
-              <FormControl
-                variant="outlined"
-                autoComplete="off"
-                margin="normal"
-                sx={{ width: "100%" }}
-              >
-                <InputLabel htmlFor="password" aria-label="password" required>
+            {/* Password */}
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="password" required>
                   Password
                 </InputLabel>
                 <OutlinedInput
                   id="password"
                   type={showPassword ? "text" : "password"}
+                  label="Password"
+                  sx={{
+                    borderRadius: 2,
+                    backgroundColor: "#f9fafc",
+                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
+                        sx={{ color: "#1976d2" }}
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }
-                  label="Password"
-                  autoComplete="off"
-                  aria-describedby="password-error"
                   error={!!errors?.password?.message}
                   {...register("password")}
                 />
                 {errors?.password && (
-                  <FormHelperText error id="password-error">
+                  <FormHelperText error>
                     {errors?.password?.message}
                   </FormHelperText>
                 )}
               </FormControl>
+            </Grid>
 
+            {/* Forgot Password */}
+            <Grid item xs={12}>
+              <Box sx={{ textAlign: "right" }}>
+                <Link
+                  href="/forgot-password"
+                  variant="body2"
+                  sx={{
+                    color: "#1976d2",
+                    fontWeight: 500,
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  Forgot password?
+                </Link>
+              </Box>
+            </Grid>
+
+            {/* Submit */}
+            <Grid item xs={12}>
               <Button
                 type="submit"
+                fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: "100%" }}
-                aria-label="login button"
+                sx={{
+                  py: 1.4,
+                  fontWeight: 600,
+                  borderRadius: 3,
+                  backgroundColor: "#1976d2",
+                  boxShadow: "0 6px 16px rgba(25,118,210,0.25)",
+                  "&:hover": {
+                    backgroundColor: "#1565c0",
+                    boxShadow: "0 8px 20px rgba(21,101,192,0.35)",
+                  },
+                }}
                 disabled={isSubmitted}
               >
                 Login
               </Button>
-              <Grid container>
-                <Grid item xs={12} sm={6}>
-                  <Link
-                    href="/forgot-password"
-                    variant="body1"
-                    aria-label="forgot password link"
-                  >
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  sx={{ display: "flex", justifyContent: "flex-end" }}
+            </Grid>
+
+            {/* Bottom Section */}
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  mt: 3,
+                  pt: 2,
+                  borderTop: "1px solid #eee",
+                  textAlign: "center",
+                }}
+              >
+                <Link
+                  href="/sign-up"
+                  variant="body2"
+                  sx={{
+                    fontWeight: 600,
+                    color: "text.primary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      color: "#1976d2",
+                    },
+                  }}
                 >
-                  <Link
-                    href="/sign-up"
-                    variant="body1"
-                    aria-label="forgot password link"
-                  >
-                    Create Account
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </CardContent>
-      </Card>
-    </Container>
-  );
+                  Create Account
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </CardContent>
+    </Card>
+  </Container>
+);
 };
 LoginForms.propTypes = {
   onSubmit: PropTypes.func,
