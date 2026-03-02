@@ -102,7 +102,7 @@ const ContactUs = () => {
                 <Stack direction="row" spacing={2}>
                   <LocationOn />
                   <Typography>
-                    جدة - حي السنابل - السعودية
+                   2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
                   </Typography>
                 </Stack>
 
