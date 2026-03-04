@@ -18,6 +18,11 @@ const sliderImages = [
   `${process.env.PUBLIC_URL}/assets/images/slider6.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/slider7.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/slider8.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/slider10.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/slider11.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/slider12.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/slider13.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/slider14.jpeg`,
 ];
 
 const ImageCarousel = ({ images = sliderImages }) => {
@@ -50,7 +55,7 @@ const ImageCarousel = ({ images = sliderImages }) => {
 
   return (
     <Box sx={{ position: "relative", width: "100%", mt: 6 }}>
-      
+
       {/* Viewport */}
       <Box
         ref={containerRef}

@@ -71,7 +71,7 @@ const WebNavigation = () => {
               src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               alt="Company Logo"
               sx={{
-                height: scrolled ? "60px" : "90px",
+                height: scrolled ? "90px" : "120px",
                 width: "auto",
                 transition: "all 0.3s ease",
                 cursor: "pointer",
@@ -152,7 +152,7 @@ const WebNavigation = () => {
               onClick={handleDrawerToggle}
               sx={{
                 display: { xs: "flex", md: "none" },
-                color: scrolled ? "#1867bf" : "#ffffff",
+                color: "#1867bf",
               }}
             >
               <MenuIcon />

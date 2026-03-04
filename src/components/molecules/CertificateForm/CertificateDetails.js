@@ -93,7 +93,7 @@ const CertificateDetails = ({ dataRow }) => {
             image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
             sx={{
               width: 180,
-              height: 90,
+              height: 120,
               objectFit: "contain",
               mx: "auto",
               mb: 2,

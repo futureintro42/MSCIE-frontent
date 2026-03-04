@@ -6,11 +6,11 @@ const AuthHeader = () => {
     <Box sx={{ flexGrow: 1, display: "flex" }}>
       <AppBar position="static" sx={{backgroundColor: "#fff"}}>
         <Toolbar>
-          <Grid container sx={{display: "flex", justifyContent: {xs: 'space-between', md: 'center'}}}>
-            <Grid item size={{ xs: 6, md: 4 }}>
+          <Grid container sx={{display: "flex", justifyContent: {xs: 'center', md: 'center'}}}>
+            <Grid item size={{ xs: 12, md: 4 }}>
               <Box
                 component="img"
-                sx={{ height: '100px', width: '100px', mr: 1.5 }}
+                sx={{ height: '120px', width: '180px', mr: 1.5 }}
                 alt=""
                 src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               />
@@ -43,15 +43,7 @@ const AuthHeader = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item size={{ xs: 6, md: 4 }}>
-              <Box
-                component="img"
-                sx={{ height: '100px', width: '100px' }}
-                alt=""
-                src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
-              />
-            </Grid>
-            <Grid item size={{ xs: 12}} sx={{width: '100%', p: 0, display: {xs: 'flex', md: 'none'}}}>
+            <Grid item size={{ xs: 12}} sx={{width: '100%', p: 0, textAlign: {xs: 'center'}, display: {xs: 'flex', md: 'none'}}}>
               <Typography
                   variant="h6"
                   component="h6"  

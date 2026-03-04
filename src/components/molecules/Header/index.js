@@ -44,7 +44,7 @@ function ResponsiveDrawer(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" }, color: 'rgba(0, 0, 0, 0.54)' }}
+            sx={{ mr: 2, display: { sm: "none" }, color: "#1867bf" }}
           >
             <MenuIcon />
           </IconButton>

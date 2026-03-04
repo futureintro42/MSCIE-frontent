@@ -15,6 +15,7 @@ const images = [
   `${process.env.PUBLIC_URL}/assets/images/banner10.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner11.jpeg`,
   `${process.env.PUBLIC_URL}/assets/images/banner12.jpeg`,
+  `${process.env.PUBLIC_URL}/assets/images/banner13.jpeg`,
 ];
 
 const HeroBanner = () => {

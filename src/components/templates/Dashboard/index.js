@@ -5,11 +5,12 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
   Container,
 } from "@mui/material";
+import BadgeIcon from "@mui/icons-material/Badge";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const Dashboard = () => {
   return (
@@ -21,7 +22,7 @@ const Dashboard = () => {
       }}
     >
       <Container maxWidth="lg">
-        
+
         {/* ===== Header Section ===== */}
         <Box textAlign="center" mb={8}>
           <Typography
@@ -42,30 +43,31 @@ const Dashboard = () => {
 
         {/* ===== Cards Section ===== */}
         <Grid container spacing={6}>
-          
+
           {/* ===== CARD SECTION ===== */}
           <Grid item xs={12} md={6}>
             <Card
               sx={{
                 borderRadius: 4,
-                overflow: "hidden",
                 boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
                 transition: "all 0.3s ease",
+                textAlign: "center",
+                p: 4,
                 "&:hover": {
                   transform: "translateY(-8px)",
                   boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
                 },
               }}
             >
-              <CardMedia
-                component="img"
-                height="200"
-                image={`${process.env.PUBLIC_URL}/assets/images/card.png`}
-                alt="Card"
-                sx={{ objectFit: "cover" }}
+              <BadgeIcon
+                sx={{
+                  fontSize: 70,
+                  color: "#1867bf",
+                  mb: 2,
+                }}
               />
 
-              <CardContent sx={{ p: 4 }}>
+              <CardContent>
                 <Typography
                   variant="h6"
                   fontWeight="bold"
@@ -105,24 +107,25 @@ const Dashboard = () => {
             <Card
               sx={{
                 borderRadius: 4,
-                overflow: "hidden",
                 boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
                 transition: "all 0.3s ease",
+                textAlign: "center",
+                p: 4,
                 "&:hover": {
                   transform: "translateY(-8px)",
                   boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
                 },
               }}
             >
-              <CardMedia
-                component="img"
-                height="200"
-                image={`${process.env.PUBLIC_URL}/assets/images/certificate.png`}
-                alt="Certificate"
-                sx={{ objectFit: "cover" }}
+              <VerifiedIcon
+                sx={{
+                  fontSize: 70,
+                  color: "#1867bf",
+                  mb: 2,
+                }}
               />
 
-              <CardContent sx={{ p: 4 }}>
+              <CardContent>
                 <Typography
                   variant="h6"
                   fontWeight="bold"
