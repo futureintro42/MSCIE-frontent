@@ -150,8 +150,7 @@ const CardView = ({ dataRow }) => {
                     width: "100%",
                     height: 110,
                     borderRadius: 2,
-                    border: "2px solid #0f4c8d",
-                    objectFit: "cover",
+                    objectFit: "fill",
                   }}
                 />
 
