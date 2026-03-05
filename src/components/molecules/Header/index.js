@@ -50,7 +50,7 @@ function ResponsiveDrawer(props) {
           </IconButton>
           <Box
             component="img"
-            sx={{ height: "100px", width: "220px", mr:1.5 }}
+            sx={{ height: "100px", width: "100px", mr:1.5 }}
             alt=""
             src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
           />

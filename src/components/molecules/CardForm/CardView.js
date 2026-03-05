@@ -65,9 +65,9 @@ const CardView = ({ dataRow }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          "@media print": {
-            pageBreakInside: "avoid",
-          },
+          // "@media print": {
+          //   pageBreakInside: "avoid",
+          // },
         }}
       >
         {/* ================= FRONT CARD ================= */}
@@ -78,9 +78,9 @@ const CardView = ({ dataRow }) => {
             borderRadius: 3,
             boxShadow: 4,
             overflow: "hidden",
-            "@media print": {
-              boxShadow: "none",
-            },
+            // "@media print": {
+            //   boxShadow: "none",
+            // },
           }}
         >
           {/* Top Header (Logo + Company) */}
@@ -88,7 +88,7 @@ const CardView = ({ dataRow }) => {
             sx={{
               background: "linear-gradient(90deg, #0f4c8d, #1565c0)",
               color: "white",
-              p: 1.5,
+              p: 1,
               display: "flex",
               alignItems: "center",
             }}
@@ -97,7 +97,7 @@ const CardView = ({ dataRow }) => {
               component="img"
               image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               alt="logo"
-              sx={{ width: 55, height: 55, mr: 1 }}
+              sx={{ width: "80px", height: "80px", mr: 1 }}
             />
 
             <Typography
@@ -110,6 +110,12 @@ const CardView = ({ dataRow }) => {
             >
               Modern Security Co. for Inspection & Examination
             </Typography>
+            <CardMedia
+              component="img"
+              alt="logo"
+              image={`${process.env.PUBLIC_URL}/assets/images/safetyLogo.png`}
+              sx={{ width: "80px", height: "80px" }}
+            />
           </Box>
 
           {/* ID Section (Below header, Right aligned, Single line) */}
@@ -212,9 +218,9 @@ const CardView = ({ dataRow }) => {
             mt: 2,
             borderRadius: 3,
             boxShadow: 4,
-            "@media print": {
-              boxShadow: "none",
-            },
+            // "@media print": {
+            //   boxShadow: "none",
+            // },
           }}
         >
           <CardContent sx={{ p: 1.5 }}>
@@ -246,7 +252,7 @@ const CardView = ({ dataRow }) => {
                     component="img"
                     image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
                     alt="logo"
-                    sx={{ width: 60, height: 60, mx: "auto" }}
+                    sx={{ width: 90, height: 90, mx: "auto" }}
                   />
                 </Box>
 

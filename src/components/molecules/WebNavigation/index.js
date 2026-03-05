@@ -71,7 +71,7 @@ const WebNavigation = () => {
               src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               alt="Company Logo"
               sx={{
-                height: scrolled ? "90px" : "120px",
+                height: scrolled ? "80px" : "100px",
                 width: "auto",
                 transition: "all 0.3s ease",
                 cursor: "pointer",

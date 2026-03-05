@@ -10,7 +10,7 @@ const AuthHeader = () => {
             <Grid item size={{ xs: 12, md: 4 }}>
               <Box
                 component="img"
-                sx={{ height: '120px', width: '180px', mr: 1.5 }}
+                sx={{ height: '100px', width: '100px', mr: 1.5 }}
                 alt=""
                 src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               />
