@@ -276,10 +276,32 @@ const CardView = ({ dataRow }) => {
                   2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
                 </Typography>
 
-                <Typography fontSize="0.7rem">Tel: 0538507454</Typography>
+                <Typography fontSize="0.7rem">
+                  Tel:{" "}
+                  <a
+                    href="tel:0538507454"
+                    style={{
+                      color: "#1976d2",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                    }}
+                  >
+                    0538507454
+                  </a>
+                </Typography>
 
                 <Typography fontSize="0.7rem">
-                  Email: info@aliiec.com
+                  Email:{" "}
+                  <a
+                    href="mailto:info@aliiec.com"
+                    style={{
+                      color: "#1976d2",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                    }}
+                  >
+                    info@aliiec.com
+                  </a>
                 </Typography>
               </Grid>
 

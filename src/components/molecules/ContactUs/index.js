@@ -101,19 +101,41 @@ const ContactUs = () => {
               <Stack spacing={3}>
                 <Stack direction="row" spacing={2}>
                   <LocationOn />
-                  <Typography>
-                   2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
+                  <Typography fontSize="1rem">
+                    2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
                   </Typography>
                 </Stack>
 
                 <Stack direction="row" spacing={2}>
                   <Phone />
-                  <Typography>0538507454</Typography>
+                  <Typography fontSize="1rem">
+                    <a
+                      href="tel:0538507454"
+                      style={{
+                        color: "#fff",
+                        textDecoration: "none",
+                        fontWeight: 800,
+                      }}
+                    >
+                      0538507454
+                    </a>
+                  </Typography>
                 </Stack>
 
                 <Stack direction="row" spacing={2}>
                   <Email />
-                  <Typography>info@aliiec.com</Typography>
+                  <Typography fontSize="1rem">
+                    <a
+                      href="mailto:info@aliiec.com"
+                      style={{
+                        color: "#fff",
+                        textDecoration: "none",
+                        fontWeight: 800,
+                      }}
+                    >
+                      info@aliiec.com
+                    </a>
+                  </Typography>
                 </Stack>
               </Stack>
             </Grid>

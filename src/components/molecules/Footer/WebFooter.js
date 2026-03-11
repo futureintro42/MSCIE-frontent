@@ -107,16 +107,34 @@ const WebFooter = () => {
                     </Box>
 
                     <Box display="flex" gap={2} sx={{ color: "#FFFFFF" }}>
-                      <Phone/>
-                      <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
-                        0538507454
+                      <Phone />
+                      <Typography fontSize="1rem">
+                        <a
+                          href="tel:0538507454"
+                          style={{
+                            color: "#fff",
+                            textDecoration: "none",
+                            fontWeight: 800,
+                          }}
+                        >
+                          0538507454
+                        </a>
                       </Typography>
                     </Box>
 
                     <Box display="flex" gap={2} sx={{ color: "#FFFFFF" }}>
                       <Email />
-                      <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
-                        info@aliiec.com
+                      <Typography fontSize="1rem">
+                        <a
+                          href="mailto:info@aliiec.com"
+                          style={{
+                            color: "#fff",
+                            textDecoration: "none",
+                            fontWeight: 800,
+                          }}
+                        >
+                          info@aliiec.com
+                        </a>
                       </Typography>
                     </Box>
                   </Stack>
@@ -166,9 +184,9 @@ const WebFooter = () => {
                                 fontWeight: 600,
                                 color: "#FFFFFF",
                                 transition: "all 0.3s ease",
-                              "&:hover": {
-                                color: "#ffcc00",
-                              },
+                                "&:hover": {
+                                  color: "#ffcc00",
+                                },
                               }}
                             >
                               {service}
