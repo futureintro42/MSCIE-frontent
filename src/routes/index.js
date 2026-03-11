@@ -32,6 +32,7 @@ const Services = lazy(() => import("../components/templates/Services"));
 const Home = lazy(() => import("../components/templates/Home"));
 const Contact = lazy(() => import("../components/templates/ContactUs"));
 const ContactUsList = lazy(() => import("../components/templates/ContactUsList"));
+const Gallery = lazy(() => import("../components/templates/Gallery"));
 
 
 const Switcher = () => {
@@ -72,6 +73,7 @@ const Switcher = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/home" element={<Home />} />
           <Route path="/contact-us" element={<Contact />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Route>
       </Routes>
     </Suspense>

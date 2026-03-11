@@ -29,6 +29,7 @@ const WebNavigation = () => {
     { key: "Cards", to: "/cards/search" },
     { key: "Certificates", to: "/certificate/search" },
     { key: "Services", to: "/services" },
+    { key: "Gallery", to: "/gallery" },
     { key: "About", to: "/about-us" },
     { key: "Contact", to: "/contact-us" },
   ];

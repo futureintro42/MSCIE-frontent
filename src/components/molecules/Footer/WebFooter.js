@@ -23,6 +23,7 @@ import {
 const WebFooter = () => {
   const NavLinks = [
     { key: "Home", to: "/" },
+    { key: "Gallery", to: "/gallery" },
     { key: "About the company", to: "/about-us" },
     { key: "Our Services", to: "/services" },
     { key: "Contact Us", to: "/contact-us" },
