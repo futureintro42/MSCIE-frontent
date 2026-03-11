@@ -65,9 +65,6 @@ const CardView = ({ dataRow }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          // "@media print": {
-          //   pageBreakInside: "avoid",
-          // },
         }}
       >
         {/* ================= FRONT CARD ================= */}
@@ -78,9 +75,6 @@ const CardView = ({ dataRow }) => {
             borderRadius: 3,
             boxShadow: 4,
             overflow: "hidden",
-            // "@media print": {
-            //   boxShadow: "none",
-            // },
           }}
         >
           {/* Top Header (Logo + Company) */}
@@ -118,35 +112,9 @@ const CardView = ({ dataRow }) => {
             />
           </Box>
 
-          {/* ID Section (Below header, Right aligned, Single line) */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              px: 2,
-              py: 0.5,
-              backgroundColor: "#f5f7fa",
-              borderBottom: "1px solid #e0e0e0",
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                color: "#0f4c8d",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                maxWidth: "100%",
-              }}
-            >
-              ID: {dataRow.id}
-            </Typography>
-          </Box>
-
-          <CardContent sx={{ p: 1.5 }}>
-            <Grid container spacing={1}>
-              {/* Left: Photo + QR */}
+          <CardContent sx={{ p: 1 }}>
+            <Grid container spacing={1.2}>
+              {/* Photo + QR */}
               <Grid item xs={4}>
                 <CardMedia
                   component="img"
@@ -154,62 +122,117 @@ const CardView = ({ dataRow }) => {
                   image={dataRow.profile_pic}
                   sx={{
                     width: "100%",
-                    height: 110,
+                    height: 95,
                     borderRadius: 2,
-                    objectFit: "fill",
+                    objectFit: "cover",
                   }}
                 />
 
                 <Box sx={{ mt: 1 }}>
                   <QRCode
                     size={256}
-                    style={{ width: "100%", height: 70 }}
+                    style={{ width: "100%", height: 50 }}
                     value={`${window.location.origin}/cards/search`}
                   />
                 </Box>
               </Grid>
 
-              {/* Right: Details */}
+              {/* User Details */}
               <Grid item xs={8}>
-                <Typography fontSize="0.75rem">
-                  <strong>Name:</strong> {dataRow.name}
-                </Typography>
-                <Typography fontSize="0.75rem">
-                  <strong>Iqama No:</strong> {dataRow.iqama_number}
-                </Typography>
-                <Typography fontSize="0.75rem">
-                  <strong>Company:</strong> {dataRow.company}
-                </Typography>
-                <Typography fontSize="0.75rem">
-                  <strong>Issued on:</strong>{" "}
-                  {formatDate(dataRow.issue_date)}
-                </Typography>
-                <Typography fontSize="0.75rem">
-                  <strong>Valid up to:</strong>{" "}
-                  {formatDate(dataRow.expiry_date)}
-                </Typography>
-              </Grid>
-
-              {/* Certification */}
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    mt: 1,
-                    backgroundColor: "#0f4c8d",
-                    color: "white",
-                    textAlign: "center",
-                    borderRadius: 1,
-                    p: 0.5,
-                  }}
-                >
-                  <Typography fontSize="0.8rem" fontWeight={600}>
-                    {dataRow.certified_as}
+                <Box sx={{ pl: 1 }}>
+                  <Typography
+                    sx={{
+                      fontSize: "1rem",
+                      fontWeight: 800,
+                      color: "#0f4c8d",
+                      lineHeight: 1.2,
+                      mb: 1,
+                    }}
+                  >
+                    {dataRow.name}
                   </Typography>
+
+                  <Grid container>
+                    {/* Row Template */}
+                    <Grid item xs={4}>
+                      <Box sx={{ display: "flex" }}>
+                        <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                          ID :
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{dataRow.id}</Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                        Name :
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{dataRow.name}</Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                        Iqama No. :
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{dataRow.iqama_number}</Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                        Company :
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{dataRow.company}</Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                        Issued on :
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{formatDate(dataRow.issue_date)}</Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <Typography sx={{ fontWeight: 600, minWidth: "90px" }}>
+                        Valid up to :
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>{formatDate(dataRow.expiry_date)}</Typography>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Grid>
             </Grid>
           </CardContent>
+          <Box
+            sx={{
+              background: "linear-gradient(90deg, #0f4c8d, #1565c0)",
+              color: "white",
+              p: .5,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {/* Certification at bottom */}
+            <Box>
+              <Typography fontSize="0.9rem" fontWeight={700}>
+                {dataRow.certified_as}
+              </Typography>
+            </Box>
+          </Box>
         </Card>
+
+
 
         {/* ================= BACK CARD ================= */}
         <Card
@@ -218,30 +241,23 @@ const CardView = ({ dataRow }) => {
             mt: 2,
             borderRadius: 3,
             boxShadow: 4,
-            // "@media print": {
-            //   boxShadow: "none",
-            // },
           }}
         >
-          <CardContent sx={{ p: 1.5 }}>
-            <Grid container spacing={1}>
+          <CardContent sx={{ p: 2 }}>
+            <Grid container spacing={1.5}>
               <Grid item xs={7}>
-                <Typography fontSize="0.65rem">
+                <Typography fontSize="0.75rem">
                   This card is issued by and remains the property of Safety
                   International Company For Inspection
                 </Typography>
 
-                <Typography
-                  fontSize="0.7rem"
-                  fontWeight={600}
-                  sx={{ mt: 1 }}
-                >
-                  The holder of this card has been successfully completed the
+                <Typography fontSize="0.75rem" fontWeight={600} sx={{ mt: 1 }}>
+                  The holder of this card has successfully completed the
                   training session on safety, stability and safe operation of
-                  the equipment(s) listed on the other side.
+                  the equipment(s).
                 </Typography>
 
-                <Typography fontSize="0.7rem" fontWeight={600} sx={{ mt: 1 }}>
+                <Typography fontSize="0.8rem" fontWeight={700} sx={{ mt: 1 }}>
                   Examiner: {dataRow.examiner}
                 </Typography>
               </Grid>
@@ -252,33 +268,34 @@ const CardView = ({ dataRow }) => {
                     component="img"
                     image={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
                     alt="logo"
-                    sx={{ width: 90, height: 90, mx: "auto" }}
+                    sx={{ width: 80, height: 80, mx: "auto" }}
                   />
                 </Box>
 
-                <Typography fontSize="0.6rem" sx={{ mt: 1 }}>
+                <Typography fontSize="0.7rem" sx={{ mt: 1 }}>
                   2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
                 </Typography>
-                <Typography fontSize="0.65rem">
-                  Tel: 0538507454
-                </Typography>
-                <Typography fontSize="0.65rem">
+
+                <Typography fontSize="0.7rem">Tel: 0538507454</Typography>
+
+                <Typography fontSize="0.7rem">
                   Email: info@aliiec.com
                 </Typography>
               </Grid>
 
               <Grid item xs={12}>
-                <Typography fontSize="0.7rem" fontWeight={600} sx={{ mt: 1 }}>
+                <Typography fontSize="0.75rem" fontWeight={700}>
                   Disclaimer:
                 </Typography>
-                <Typography fontSize="0.65rem">
+
+                <Typography fontSize="0.7rem">
                   SIIC accepts no liability for any errors committed by the
                   holder of this card whilst attending the categorized duty
                 </Typography>
               </Grid>
 
               <Grid item xs={12} sx={{ textAlign: "center" }}>
-                <Typography fontSize="0.7rem" color="red" fontWeight={700}>
+                <Typography fontSize="0.8rem" color="red" fontWeight={700}>
                   THIS IS NOT A SAUDI ARABIAN GOVERNMENT LICENSE
                 </Typography>
               </Grid>

@@ -259,7 +259,7 @@ const WebFooter = () => {
                 fontWeight: 700,
               }}
             >
-              Modern Safety Company for Inspection & Examination
+              Modern Aman Company for Inspection & Examination
             </Link>
             . All Rights Reserved.
           </Typography>
