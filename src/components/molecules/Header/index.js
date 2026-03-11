@@ -75,7 +75,7 @@ function ResponsiveDrawer(props) {
                 textDecoration: "none",
               }}
             >
-              Modern Security Co. for Inspection & Examination
+              Modern Alaman company for Inspection & Examination
             </Typography>
           </Box>
           <Box sx={{ flexGrow: 0 }}>

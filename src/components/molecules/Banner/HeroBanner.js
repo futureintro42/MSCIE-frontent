@@ -114,7 +114,7 @@ const HeroBanner = () => {
               mb: 3,
             }}
           >
-            Welcome to Modern Security Co. for Inspection & Examination
+            Welcome to Modern Alaman company for Inspection & Examination
           </Typography>
 
           <Typography

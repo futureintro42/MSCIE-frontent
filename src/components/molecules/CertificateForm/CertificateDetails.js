@@ -105,7 +105,7 @@ const CertificateDetails = ({ dataRow }) => {
             fontWeight="bold"
             sx={{ letterSpacing: 0.5 }}
           >
-            Modern Security Co. for Inspection & Examination
+            Modern Alaman company for Inspection & Examination
           </Typography>
         </Box>
 
