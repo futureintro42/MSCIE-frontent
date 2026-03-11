@@ -102,7 +102,7 @@ const CardView = ({ dataRow }) => {
                 lineHeight: 1.2,
               }}
             >
-              Modern Safety Company for Inspection & Examination
+              Modern Aman Company for Inspection & Examination
             </Typography>
             <CardMedia
               component="img"
