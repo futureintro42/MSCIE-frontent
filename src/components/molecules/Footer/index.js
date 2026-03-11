@@ -13,7 +13,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
       <Link color="inherit" href="/#">
-        Modern Alaman company for Inspection & Examination
+        Modern Safety Company for Inspection & Examination
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

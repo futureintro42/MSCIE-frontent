@@ -39,7 +39,7 @@ const AuthHeader = () => {
                     textDecoration: "none",
                   }}
                 >
-                  Modern Alaman company for Inspection & Examination
+                  Modern Safety Company for Inspection & Examination
                 </Typography>
               </Box>
             </Grid>
@@ -61,7 +61,7 @@ const AuthHeader = () => {
                     padding: '0'
                   }}
                 >
-                  Modern Alaman company for Inspection & Examination
+                  Modern Safety Company for Inspection & Examination
                 </Typography>
             </Grid>
           </Grid>

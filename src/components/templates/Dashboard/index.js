@@ -81,7 +81,7 @@ const Dashboard = () => {
                   color="text.secondary"
                   mb={3}
                 >
-                  Modern Alaman company for Inspection & Examination
+                  Modern Safety Company for Inspection & Examination
                 </Typography>
 
                 <Button
@@ -139,7 +139,7 @@ const Dashboard = () => {
                   color="text.secondary"
                   mb={3}
                 >
-                  Modern Alaman company for Inspection & Examination
+                  Modern Safety Company for Inspection & Examination
                 </Typography>
 
                 <Button

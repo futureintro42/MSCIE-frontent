@@ -259,7 +259,7 @@ const WebFooter = () => {
                 fontWeight: 700,
               }}
             >
-              Modern Alaman company for Inspection & Examination
+              Modern Safety Company for Inspection & Examination
             </Link>
             . All Rights Reserved.
           </Typography>

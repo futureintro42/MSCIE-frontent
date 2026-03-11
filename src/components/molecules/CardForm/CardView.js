@@ -108,7 +108,7 @@ const CardView = ({ dataRow }) => {
                 lineHeight: 1.2,
               }}
             >
-              Modern Alaman company for Inspection & Examination
+              Modern Safety Company for Inspection & Examination
             </Typography>
             <CardMedia
               component="img"

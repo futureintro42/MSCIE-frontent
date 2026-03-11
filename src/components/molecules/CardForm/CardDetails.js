@@ -91,7 +91,7 @@ const CardView = ({ dataRow }) => {
             fontWeight="bold"
             sx={{ letterSpacing: 0.5 }}
           >
-            Modern Alaman company for Inspection & Examination
+            Modern Safety Company for Inspection & Examination
           </Typography>
         </Box>
 
