@@ -125,7 +125,7 @@ const HeroBanner = () => {
               mb: 4,
             }}
           >
-            Trusted partner in inspection, testing, safety, and professional training.
+            Do you need a certified certificate today? We offer specialized engineering services in inspection, testing, equipment, machinery, and driver services in Saudi Arabia.
           </Typography>
 
           <Stack
