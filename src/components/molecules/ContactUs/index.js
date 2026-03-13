@@ -102,7 +102,7 @@ const ContactUs = () => {
                 <Stack direction="row" spacing={2}>
                   <LocationOn />
                   <Typography fontSize="1rem">
-                    2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
+                    Kingdom of Saudi Arabia - Jeddah - Al-Sanabel District - 22444 - 2989
                   </Typography>
                 </Stack>
 
@@ -115,9 +115,22 @@ const ContactUs = () => {
                         color: "#fff",
                         textDecoration: "none",
                         fontWeight: 800,
+                        marginRight: "8px"
                       }}
                     >
                       0538507454
+                    </a>
+                    /
+                    <a
+                      href="tel:0543125155"
+                      style={{
+                        color: "#fff",
+                        textDecoration: "none",
+                        fontWeight: 800,
+                        marginLeft: "8px"
+                      }}
+                    >
+                      0543125155
                     </a>
                   </Typography>
                 </Stack>

@@ -212,7 +212,7 @@ const CardView = ({ dataRow }) => {
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                   <Typography sx={{ fontSize: "10px" }}>
-                    2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
+                    Kingdom of Saudi Arabia - Jeddah - Al-Sanabel District - 22444 - 2989
                   </Typography>
                   <Typography fontSize="0.7rem">
                     Tel:{" "}
@@ -222,11 +222,25 @@ const CardView = ({ dataRow }) => {
                         color: "#1976d2",
                         textDecoration: "none",
                         fontWeight: 600,
+                        marginRight: "8px"
                       }}
                     >
                       0538507454
                     </a>
+                    /
+                    <a
+                      href="tel:0543125155"
+                      style={{
+                        color: "#1976d2",
+                        textDecoration: "none",
+                        fontWeight: 600,
+                        marginLeft: "8px"
+                      }}
+                    >
+                      0543125155
+                    </a>
                   </Typography>
+
 
                   <Typography fontSize="0.7rem">
                     Email:{" "}

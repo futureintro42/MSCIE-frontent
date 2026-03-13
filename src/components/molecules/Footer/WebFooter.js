@@ -8,6 +8,7 @@ import {
   Stack,
   IconButton,
   Paper,
+  CardMedia
 } from "@mui/material";
 import {
   LocationOn,
@@ -27,6 +28,12 @@ const WebFooter = () => {
     { key: "About the company", to: "/about-us" },
     { key: "Our Services", to: "/services" },
     { key: "Contact Us", to: "/contact-us" },
+  ];
+  const serviceIcons = [
+    "support.png",
+    "service.png",
+    "guranty.png",
+    "elite_service.png",
   ];
 
   return (
@@ -102,7 +109,7 @@ const WebFooter = () => {
                     <Box display="flex" gap={2} sx={{ color: "#FFFFFF" }}>
                       <LocationOn />
                       <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
-                        2989 - 22444 - السعوديه ـ جدة ـ حي السنابل
+                        Kingdom of Saudi Arabia - Jeddah - Al-Sanabel District - 22444 - 2989
                       </Typography>
                     </Box>
 
@@ -115,9 +122,22 @@ const WebFooter = () => {
                             color: "#fff",
                             textDecoration: "none",
                             fontWeight: 800,
+                            marginRight: "8px"
                           }}
                         >
                           0538507454
+                        </a>
+                        /
+                        <a
+                          href="tel:0543125155"
+                          style={{
+                            color: "#fff",
+                            textDecoration: "none",
+                            fontWeight: 800,
+                            marginLeft: "8px"
+                          }}
+                        >
+                          0543125155
                         </a>
                       </Typography>
                     </Box>
@@ -242,6 +262,29 @@ const WebFooter = () => {
 
             </Grid>
           </Grid>
+
+        </Grid>
+
+        {/* SERVICE ICONS */}
+        <Grid container spacing={3} justifyContent="center" mt={5}>
+          {serviceIcons.map((img, i) => (
+            <Grid item xs={6} sm={3} textAlign="center" key={i}>
+              <CardMedia
+                component="img"
+                image={`${process.env.PUBLIC_URL}/assets/images/${img}`}
+                sx={{
+                  width: 80,
+                  height: 80,
+                  objectFit: "contain",
+                  margin: "0 auto",
+                  transition: "0.3s",
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                  },
+                }}
+              />
+            </Grid>
+          ))}
         </Grid>
 
         <Divider sx={{ borderColor: "rgba(255,255,255,0.4)", my: 4 }} />
