@@ -271,20 +271,6 @@ const ContactUs = () => {
             </Grid>
           </Grid>
         </Paper>
-
-        {/* MAP */}
-        <Box mt={8}>
-          <Box
-            component="iframe"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7429.5860279590315!2d39.26782784555164!3d21.39805321068467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cb0018379f91%3A0x8986ad96f81a031!2z2K3ZiiDYp9mE2LPZhtin2KjZhA!5e0!3m2!1sen!2sin!4v1771823230381!5m2!1sen!2sin"
-            width="100%"
-            height={{ xs: "300px", md: "450px" }}
-            sx={{ border: 0, borderRadius: 2 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </Box>
       </Container>
     </Box>
   );
